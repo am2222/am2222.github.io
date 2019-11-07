@@ -64,3 +64,6 @@ topics:
   - name: IPFS
     web_url: https://github.com/ipfs/ipfs
     image_url: https://cluster.ipfs.io/android-chrome-192x192.png
+    
+  - name: Full stack Developer
+    image_url: https://letzgro.net/wp-content/uploads/2016/07/Web-Developer-Skills-1.jpg
