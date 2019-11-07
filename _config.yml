@@ -25,9 +25,13 @@ projects:
   #   - stars
   limit: 9
   exclude:
-    archived: false
+    archived: true
     forks: true
     projects:
+        # -"pydggrid"
+        # "mapjfxdxbrowser"
+        # "GarbagebinCollector"
+        # "SAGASharp"
     # - repo-name
 
 social_media:
