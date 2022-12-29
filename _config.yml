@@ -29,9 +29,8 @@ projects:
     forks: true
     projects:
         # -"pydggrid"
-        # "mapjfxdxbrowser"
-        # "GarbagebinCollector"
-        # "SAGASharp"
+        # "AGILECA"
+        # "strapi-plugin-postgis"
     # - repo-name
 
 social_media:
@@ -57,11 +56,11 @@ topics:
     web_url: https://github.com/am2222/pydggrid
     image_url: https://github.com/am2222/pydggrid/blob/master/docs/L6kmP.jpg?raw=true
 
-  - name: Decentralization 
-#     web_url: https://github.com/am2222/pydggrid
-    image_url: https://ipfs.io/images/ipfs-illustration-centralized.svg
+  - name: GIScience  
+    web_url: https://scholar.google.com/citations?hl=en&user=QNGs_a4AAAAJ&view_op=list_works&sortby=pubdate
+    image_url: https://media.springernature.com/m312/springer-static/image/chp%3A10.1007%2F978-3-030-55092-9_15/MediaObjects/492893_1_En_15_Fig1_HTML.png?as=webp
     
-  - name: IPFS
+  - name: IPFS and Decentralization
     web_url: https://github.com/ipfs/ipfs
     image_url: https://cluster.ipfs.io/android-chrome-192x192.png
     
