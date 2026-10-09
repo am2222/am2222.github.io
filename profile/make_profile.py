@@ -120,11 +120,12 @@ def main(out_dir, image_base=None):
             cards.append(
                 f'<a href="{repo["html_url"]}"><picture>'
                 f'<source media="(prefers-color-scheme: dark)" srcset="{cards_url}/{repo["name"]}-dark.svg">'
-                f'<img src="{cards_url}/{repo["name"]}-light.svg" alt="{escape(repo["name"])}" width="49%">'
+                f'<img src="{cards_url}/{repo["name"]}-light.svg" alt="{escape(repo["name"])}" width="{WIDTH}">'
                 f"</picture></a>"
             )
-        # Two cards per row, like the pinned grid
-        rows = "\n".join(" ".join(cards[i:i + 2]) for i in range(0, len(cards), 2))
+        # Fixed-width cards flow like text: two per row where they fit, one per
+        # row on narrow screens (GitHub also caps images at the column width).
+        rows = "\n".join(cards)
         sections.append(f"### {group['name']}\n\n<p>\n{rows}\n</p>")
 
     readme.write_text(
