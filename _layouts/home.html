@@ -1,55 +1,70 @@
-{% include header.html %}
-
-{% if site.layout == 'stacked' %}
-  <div class="container-lg py-6 p-responsive text-center">
-    {% include masthead.html metadata=true %}
-
-    <div {% if site.style == 'dark' %}class="text-white"{% endif %}>
-      {{ content }}
-    </div>
-
-    <div class="my-6">
-      {% include projects.html %}
-    </div>
-
-    {% if site.topics %}
-      <div class="my-6">
-        {% include interests.html %}
+{% assign user = site.github.owner %}
+{% assign meta_description = user.bio | strip_html | strip_newlines | xml_escape | truncate: 300 %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ user.name }} ({{ user.login }})</title>
+    <meta name="description" content="{{ meta_description }}">
+    <meta property="og:title" content="{{ user.name }}">
+    <meta property="og:image" content="{{ user.avatar_url }}">
+    <meta property="og:description" content="{{ meta_description }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link href="{{ '/assets/profile.css' | relative_url }}" rel="stylesheet">
+  </head>
+  <body>
+    <header class="gh-header">
+      <div class="gh-header-top">
+        <a href="https://github.com/{{ user.login }}" class="gh-mark" aria-label="GitHub profile">{% octicon mark-github height:32 %}</a>
+        <span class="gh-header-title">{{ user.login }}</span>
       </div>
-    {% endif %}
+      <nav class="gh-tabs" aria-label="Sections">
+        <a href="#overview" class="gh-tab selected">{% octicon book height:16 %} Overview</a>
+        <a href="#projects" class="gh-tab">{% octicon repo height:16 %} Projects</a>
+        <a href="https://scholar.google.com/citations?user=QNGs_a4AAAAJ&hl=en" class="gh-tab">{% octicon mortar-board height:16 %} Publications</a>
+        <a href="#interests" class="gh-tab">{% octicon star height:16 %} Interests</a>
+      </nav>
+    </header>
 
-    {% unless posts_total == 0 %}
-      <div class="my-6">
-        {% include thoughts.html %}
-      </div>
-    {% endunless %}
-  </div>
-{% else %}
-  <div class="d-md-flex min-height-full {% unless site.style == 'dark' %}border-md-bottom{% endunless %}">
-    <div class="flex-self-stretch {% if site.style == 'dark' %}bg-gray-dark{% else %}border-md-right border-gray-light bg-white{% endif %} col-md-5 col-lg-4 col-xl-3 px-4 px-md-6 px-lg-7 py-6">
-      {% include masthead.html metadata=true %}
-    </div>
+    <main class="gh-layout" id="overview">
+      <aside class="gh-sidebar">
+        <img src="{{ user.avatar_url }}" alt="{{ user.name }}" class="gh-avatar">
+        <h1 class="gh-names">
+          <span class="gh-name">{{ user.name }}</span>
+          <span class="gh-login">{{ user.login }}</span>
+        </h1>
+        <a href="https://github.com/{{ user.login }}" class="gh-btn">Follow on GitHub</a>
+        <div class="gh-bio">
+          {{ user.bio }}
+          <p>I work on geospatial AI: agentic AI systems, 3D reconstruction, and Discrete Global Grid Systems. PhD, Wilfrid Laurier University.</p>
+        </div>
+        <ul class="gh-details">
+          {% if user.location %}<li>{% octicon location height:16 %} {{ user.location }}</li>{% endif %}
+          <li>{% octicon mortar-board height:16 %} <a href="https://scholar.google.com/citations?user=QNGs_a4AAAAJ&hl=en">Google Scholar</a></li>
+          {% for account in site.social_media %}
+            {% assign service_shortname = account[0] %}
+            {% assign service = site.data.social_media[service_shortname] %}
+            <li>{% octicon link height:16 %} <a href="{{ service.profile_url_prefix }}{{ account[1] }}">{{ service.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </aside>
 
-    <div class="col-md-7 col-lg-8 col-xl-9 px-4 py-6 px-lg-7 border-top border-md-top-0 bg-gray-light" {% if site.style == 'dark' %}style="background-color: #2f363d !important"{% endif %}>
-      <div class="mx-auto" style="max-width: 900px;">
-        {% unless content == ""  %}
-          <div class="f4 {% if site.style == 'dark' %}text-white{% endif %} mb-6">
+      <div class="gh-main">
+        <section class="gh-box">
+          <div class="gh-box-header">{{ user.login }} / README.md</div>
+          <article class="markdown-body">
             {{ content }}
-          </div>
-        {% endunless %}
+          </article>
+        </section>
 
         {% include projects.html %}
-
-        {% if site.topics %}
-          {% include interests.html %}
-        {% endif %}
-
-        {% unless posts_total == 0 %}
-          {% include thoughts.html %}
-        {% endunless %}
+        {% include interests.html %}
       </div>
-    </div>
-  </div>
-{% endif %}
+    </main>
 
-{% include footer.html %}
+    <footer class="gh-footer">
+      {% octicon mark-github height:20 %} <span>© {{ 'now' | date: '%Y' }} {{ user.name }}</span>
+    </footer>
+  </body>
+</html>

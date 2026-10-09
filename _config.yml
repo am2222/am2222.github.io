@@ -17,21 +17,30 @@ defaults:
       layout: "post"
 
 projects:
-
-  sort_by: pushed
-  #- pushed
-  # sort_by options:
-  #   - pushed
-  #   - stars
-  limit: 9
-  exclude:
-    archived: true
-    forks: true
-    projects:
-        # -"pydggrid"
-        # "AGILECA"
-        # "strapi-plugin-postgis"
-    # - repo-name
+  # Curated groups shown on the home page. Stars, language and the default
+  # description come live from the GitHub API; `description` overrides it.
+  groups:
+    - name: Discrete Global Grid Systems
+      repos:
+        - name: webDggrid
+        - name: duckdb-dggs
+        - name: pydggrid
+    - name: DuckDB extensions
+      repos:
+        - name: duck_geoarrow
+        - name: duckrouting
+    - name: Web mapping & geo backends
+      repos:
+        - name: mapbox-pmtiles
+        - name: maplibre-landmarks
+        - name: express-ogc-api
+        - name: strapi-plugin-postgis
+    - name: Research
+      repos:
+        - name: DSTree
+        - name: AGILECA
+        - name: dygeoprivacyp2p
+          description: Dynamic geoprivacy model based on DGGS in P2P environments
 
 social_media:
   # behance: your_username
@@ -60,9 +69,18 @@ topics:
     web_url: https://scholar.google.com/citations?hl=en&user=QNGs_a4AAAAJ&view_op=list_works&sortby=pubdate
     image_url: https://media.springernature.com/m312/springer-static/image/chp%3A10.1007%2F978-3-030-55092-9_15/MediaObjects/492893_1_En_15_Fig1_HTML.png?as=webp
     
-  - name: IPFS and Decentralization
-    web_url: https://github.com/ipfs/ipfs
-    image_url: https://cluster.ipfs.io/android-chrome-192x192.png
-    
-  - name: Full stack Developer
-    image_url: https://letzgro.net/wp-content/uploads/2016/07/Web-Developer-Skills-1.jpg
+  - name: GeoAI & Agentic AI
+    description: LLM agents that reason about space, and testing how well LLMs understand spatial concepts
+    web_url: https://scholar.google.com/citations?user=QNGs_a4AAAAJ&hl=en
+    image_url: /assets/img/geoai.svg
+
+  - name: 3D Reconstruction
+    description: Triangle Splatting+ from drone imagery, served as 3D Tiles
+    image_url: /assets/img/splatting.svg
+
+# Source for the github.com/am2222 profile README; synced by .github/workflows/sync-profile-readme.yml
+exclude:
+  - profile/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/

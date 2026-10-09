@@ -1,0 +1,31 @@
+# Copies profile/README.md to the am2222/am2222 repo, which GitHub shows on
+# github.com/am2222. Needs a PROFILE_REPO_TOKEN secret: a fine-grained token
+# with Contents read/write on am2222/am2222 only.
+name: Sync profile README
+
+on:
+  push:
+    branches: [master]
+    paths: [profile/README.md]
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: am2222/am2222
+          token: ${{ secrets.PROFILE_REPO_TOKEN }}
+          path: profile-repo
+      - name: Commit and push if changed
+        run: |
+          cp profile/README.md profile-repo/README.md
+          cd profile-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet && { echo "No changes"; exit 0; }
+          git commit -m "Sync README from am2222.github.io@${GITHUB_SHA::7}"
+          git push

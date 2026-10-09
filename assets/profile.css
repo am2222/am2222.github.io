@@ -1,0 +1,94 @@
+/* GitHub-profile look, using GitHub's Primer colour tokens */
+:root {
+  --fg: #1f2328; --fg-muted: #59636e; --accent: #0969da;
+  --canvas: #ffffff; --canvas-subtle: #f6f8fa; --border: #d1d9e0; --border-muted: #d1d9e0b3;
+  --tab-active: #fd8c73; --btn-bg: #f6f8fa; --btn-hover: #eff2f5;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #f0f6fc; --fg-muted: #9198a1; --accent: #4493f8;
+    --canvas: #0d1117; --canvas-subtle: #151b23; --border: #3d444d; --border-muted: #3d444db3;
+    --tab-active: #f78166; --btn-bg: #212830; --btn-hover: #262c36;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--canvas); color: var(--fg);
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+svg.octicon { fill: currentColor; vertical-align: text-bottom; }
+
+/* Header + underline tabs */
+.gh-header { background: var(--canvas-subtle); border-bottom: 1px solid var(--border); padding: 16px 16px 0; }
+.gh-header-top { display: flex; align-items: center; gap: 12px; max-width: 1280px; margin: 0 auto; padding: 0 16px; }
+.gh-mark { color: var(--fg); display: flex; }
+.gh-header-title { font-weight: 600; font-size: 14px; }
+.gh-tabs { display: flex; gap: 8px; max-width: 1280px; margin: 8px auto 0; padding: 0 16px 0 calc(16px + max(0px, min(296px + 24px, (100% - 32px) * 0.25 + 24px))); overflow-x: auto; scrollbar-width: none; }
+.gh-tab { display: flex; align-items: center; gap: 8px; padding: 8px 8px 10px; color: var(--fg); border-bottom: 2px solid transparent; white-space: nowrap; border-radius: 6px 6px 0 0; }
+.gh-tab:hover { text-decoration: none; background: var(--btn-hover); }
+.gh-tab .octicon { color: var(--fg-muted); }
+.gh-tab.selected { font-weight: 600; border-bottom-color: var(--tab-active); }
+
+/* Two-column profile layout */
+.gh-layout { display: flex; gap: 24px; max-width: 1280px; margin: 0 auto; padding: 24px 32px; }
+.gh-sidebar { flex: 0 0 25%; max-width: 296px; margin-top: -40px; }
+.gh-main { flex: 1; min-width: 0; }
+.gh-avatar { width: 100%; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--border); background: var(--canvas); }
+.gh-names { margin: 16px 0; line-height: 1.25; }
+.gh-name { display: block; font-size: 24px; font-weight: 600; }
+.gh-login { display: block; font-size: 20px; font-weight: 300; color: var(--fg-muted); }
+.gh-btn { display: block; text-align: center; padding: 5px 16px; font-weight: 500; color: var(--fg); background: var(--btn-bg); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 16px; }
+.gh-btn:hover { background: var(--btn-hover); text-decoration: none; }
+.gh-bio { font-size: 16px; margin-bottom: 16px; }
+.gh-bio p { margin: 8px 0 0; font-size: 14px; color: var(--fg-muted); }
+.gh-details { list-style: none; padding: 16px 0 0; margin: 0; border-top: 1px solid var(--border-muted); }
+.gh-details li { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.gh-details .octicon { color: var(--fg-muted); }
+.gh-details a { color: var(--fg); }
+.gh-details a:hover { color: var(--accent); }
+
+/* README box */
+.gh-box { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 24px; }
+.gh-box-header { padding: 16px 24px 0; font-size: 12px; color: var(--fg-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.markdown-body { padding: 8px 24px 24px; font-size: 16px; }
+.markdown-body h2 { font-size: 1.5em; font-weight: 600; padding-bottom: .3em; border-bottom: 1px solid var(--border-muted); margin: 24px 0 16px; }
+.markdown-body h2:first-child { margin-top: 8px; }
+.markdown-body ul { padding-left: 2em; margin: 0 0 16px; }
+.markdown-body li + li { margin-top: .25em; }
+.markdown-body p { margin: 0 0 16px; }
+.markdown-body .f5, .markdown-body .text-gray { font-size: 14px; color: var(--fg-muted); }
+
+/* Pinned-style cards */
+.gh-section-title { font-size: 16px; font-weight: 400; margin: 0 0 8px; }
+.gh-grid { list-style: none; padding: 0; margin: 0 0 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.gh-card { height: 100%; display: flex; flex-direction: column; padding: 16px; border: 1px solid var(--border); border-radius: 6px; background: var(--canvas); }
+.gh-card-head { display: flex; align-items: center; gap: 8px; }
+.gh-muted-icon { color: var(--fg-muted); flex-shrink: 0; }
+.gh-repo-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gh-label { margin-left: auto; padding: 0 7px; font-size: 12px; font-weight: 500; line-height: 18px; color: var(--fg-muted); border: 1px solid var(--border); border-radius: 2em; }
+.gh-card-desc { flex: 1; margin: 8px 0 16px; font-size: 12px; color: var(--fg-muted); }
+.gh-card-meta { display: flex; gap: 16px; margin: 0; font-size: 12px; color: var(--fg-muted); }
+.gh-card-meta a { color: var(--fg-muted); }
+.gh-card-meta a:hover { color: var(--accent); text-decoration: none; }
+.gh-lang-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; border: 1px solid #ffffff1a; }
+.gh-topic { flex-direction: row; align-items: center; gap: 16px; }
+.gh-topic img { border-radius: 6px; flex-shrink: 0; object-fit: cover; }
+.gh-topic .gh-card-desc { margin: 4px 0 0; flex: none; }
+
+.gh-footer { display: flex; align-items: center; gap: 8px; max-width: 1280px; margin: 0 auto; padding: 40px 32px; color: var(--fg-muted); font-size: 12px; border-top: 1px solid var(--border-muted); }
+
+/* Mobile: stack like GitHub does */
+@media (max-width: 767px) {
+  .gh-layout { flex-direction: column; padding: 16px; gap: 16px; }
+  .gh-sidebar { max-width: none; margin-top: 0; display: grid; grid-template-columns: 72px 1fr; column-gap: 16px; align-items: center; }
+  .gh-avatar { width: 72px; }
+  .gh-names { margin: 0; }
+  .gh-btn, .gh-bio, .gh-details { grid-column: 1 / -1; }
+  .gh-btn { margin-top: 16px; }
+  .gh-tabs { padding-left: 16px; }
+  .gh-grid { grid-template-columns: 1fr; }
+  .markdown-body { padding: 8px 16px 16px; }
+  .gh-footer { padding: 24px 16px; }
+}
