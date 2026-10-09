@@ -82,6 +82,7 @@ topics:
 # Source for the github.com/am2222 profile README; synced by .github/workflows/sync-profile-readme.yml
 exclude:
   - profile/
+  - README.md
   - Gemfile
   - Gemfile.lock
   - vendor/
