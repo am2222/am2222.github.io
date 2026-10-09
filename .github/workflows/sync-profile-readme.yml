@@ -16,6 +16,9 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write # for the keepalive step
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
@@ -39,3 +42,10 @@ jobs:
           git diff --cached --quiet && { echo "No changes"; exit 0; }
           git commit -m "Update profile README from am2222.github.io@${GITHUB_SHA::7}"
           git push
+      # GitHub disables scheduled workflows after 60 days without commits to
+      # this repo. Re-enabling through the API resets that timer, no commit needed.
+      - name: Keep the daily schedule alive
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/sync-profile-readme.yml/enable"
