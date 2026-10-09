@@ -24,7 +24,6 @@ projects:
       repos:
         - name: webDggrid
         - name: duckdb-dggs
-        - name: pydggrid
     - name: DuckDB extensions
       repos:
         - name: duck_geoarrow
@@ -41,6 +40,8 @@ projects:
         - name: AGILECA
         - name: dygeoprivacyp2p
           description: Dynamic geoprivacy model based on DGGS in P2P environments
+        - name: pydggrid
+
 
 social_media:
   # behance: your_username
