@@ -1,12 +1,16 @@
-# Copies profile/README.md to the am2222/am2222 repo, which GitHub shows on
-# github.com/am2222. Needs a PROFILE_REPO_TOKEN secret: a fine-grained token
-# with Contents read/write on am2222/am2222 only.
+# Builds the github.com/am2222 profile README (pinned-style repo cards) with
+# profile/make_profile.py and pushes it to the am2222/am2222 repo.
+# Runs when the project list changes, daily to refresh star counts, or by hand.
+# Needs a PROFILE_REPO_TOKEN secret: a fine-grained token with Contents
+# read/write on am2222/am2222 only.
 name: Sync profile README
 
 on:
   push:
     branches: [master]
-    paths: [profile/README.md]
+    paths: [_config.yml, _data/colors.json, profile/**]
+  schedule:
+    - cron: "17 6 * * *"
   workflow_dispatch:
 
 jobs:
@@ -19,13 +23,19 @@ jobs:
           repository: am2222/am2222
           token: ${{ secrets.PROFILE_REPO_TOKEN }}
           path: profile-repo
-      - name: Commit and push if changed
+      - name: Build README and cards
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
-          cp profile/README.md profile-repo/README.md
-          cd profile-repo
+          pip install --quiet pyyaml
+          rm -rf profile-repo/cards
+          python3 profile/make_profile.py profile-repo
+      - name: Push if changed
+        working-directory: profile-repo
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
-          git add README.md
+          git add -A
           git diff --cached --quiet && { echo "No changes"; exit 0; }
-          git commit -m "Sync README from am2222.github.io@${GITHUB_SHA::7}"
+          git commit -m "Update profile README from am2222.github.io@${GITHUB_SHA::7}"
           git push
